@@ -27,14 +27,14 @@ app.use(express.static(path.join(__dirname, 'upload')));
 
 //配置中间件，保存用户信息
 app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
+    secret: 'keyboard cat', //用来注册session id 到cookie中，相当与一个密钥。
+    resave: false,  //是否允许session重新设置，要保证session有操作的时候必须设置这个属性为true
+    saveUninitialized: false, //是否设置session在存储容器中可以给修改
     cookie: {
-        maxAge:1000*60*30
+        maxAge:1000*60*30 //session过期时间
     },
-    rolling:true
-}));
+    rolling:true  //是否按照原设定的maxAge值重设session同步到cookie中，要保证session有操作的时候必须设置这个属性为true,同时需要saveUninitialized设置为false
+}));  
 
 
 //路由
